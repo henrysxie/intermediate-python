@@ -1,11 +1,10 @@
 # Class Info
-- teacher: Suneel Chakravorty, twitter: @suneelius
-- chakravorty@post.harvard.edu
-guest access for chatroom: https://www.hipchat.com/geDHwPme2
-- class chatroom: https://suneelius.hipchat.com/chat
+- teacher: Henry Xie
+- henryxie@post.harvard.edu
+guest access for chatroom: https://www.hipchat.com/gUCJ7wzsu
 - wifi: GA guest, password: yellowpencil
 
-# Python Warm Up and Diagnostic
+# Python Warm Up
 ## Objectives
 - review/test/warm up knowledge of lists, for loops, logical control flow, and list comprehensions
 
