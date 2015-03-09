@@ -1,8 +1,8 @@
-# Class Info
-- teacher: Henry Xie
-- henryxie@post.harvard.edu
-guest access for chatroom: https://www.hipchat.com/gUCJ7wzsu
-- wifi: GA guest, password: yellowpencil
+# Class Info (https://github.com/xie1989/ga-advanced-python)
+- Teacher: Henry Xie
+- Email: henrysxie@gmail.com
+- Guest access for chatroom: https://www.hipchat.com/gUCJ7wzsu
+- Wifi: GA guest, password: yellowpencil
 
 # Python Warm Up
 ## Objectives
