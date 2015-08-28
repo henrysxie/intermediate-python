@@ -8,7 +8,7 @@
 ## Objectives
 - review/test/warm up knowledge of lists, for loops, logical control flow, and list comprehensions
 
-1. Write a function that takes prints all the even numbers between 1 and 10,000.
+1. Write a function that prints all the even numbers between 1 and 10,000.
 2. Write a function that returns a list of the numbers between 1 and 10,000 that are divisible by 3.
 3. The same as 2, but use Python list comprehensions
 4. Write a function `get_max` that takes a list of numbers and returns the max of those numbers, don't use the builtin `max()` function. Afterward,  try using `max()`
