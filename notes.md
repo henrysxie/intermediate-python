@@ -53,7 +53,6 @@ This reviewed FOR LOOPS, IF CONDITIONS, and PRINTING
 
 Solution:
 ```python
-This reviews basic use of LISTS
 def divisible_by_3():
     numbers = []
     for x in xrange(10001):
@@ -61,7 +60,7 @@ def divisible_by_3():
            numbers.append(x)
     return numbers
 ```
-Note: we use `xrange` instead of `range` because `range` loads the entire list into memory, while `xrange` just creates an iterator: https://mail.python.org/pipermail/python-list/2012-November/634509.html. If you have a really big list, `xrange` is way faster. In Python 3 `range` works the same way as `xrange`.
+This reviews basic use of LISTS. Note: we use `xrange` instead of `range` because `range` loads the entire list into memory, while `xrange` just creates an iterator: https://mail.python.org/pipermail/python-list/2012-November/634509.html. If you have a really big list, `xrange` is way faster. In Python 3 `range` works the same way as `xrange`.
 
 3 - The same as #2, but use Python list comprehensions.
 
@@ -121,15 +120,16 @@ def divide(a, b):
 Do not catch the general `Exception` since we won't know if some other error occurred.
 
 
-8 - Given a list of food orders, e.g. ["burger", "fries", "burger", "tenders", "apple pie"], write a function that takes the list
-and returns a dictionary with the different dishes as keys and the number of times they appear in the list as the values. For example,
-Takes ["burger", "fries", "burger", "tenders", "apple pie"] and turns it into
+8 - Given a list of food orders, write a function that takes the list and returns a dictionary with the different dishes as keys and the number of times they appear in the list as the values. For example,
+Takes `["burger", "fries", "burger", "tenders", "apple pie"]` and returns:
+```python
 {
    "burger": 2,
    "fries": 1,
    "tenders": 1,
    "apple pie": 1
 }
+```
 
 Solution:
 ```python
@@ -150,20 +150,19 @@ def tally(order_list):
 Solution:
 ```python
 def get_most_popular_order_data(order_list):
-    agg_counts = aggregate_counts(order_list)
+    order_tally = tally(order_list)
     # the key is a function that tells `max` what to sort by
     # in this case, it's the second element of the tuple, e.g. 2 in ("burger", 2)
     # which is just the number of times it appears in the list of orders
-    return max(agg_accounts.iteritems(), key=lambda: agg_count[1])
+    return max(order_tally.iteritems(), key=lambda x: x[1])
 ```
 Note: for more on lambda functions, check this out http://www.diveintopython.net/power_of_introspection/lambda_functions.html
 
 
-## Python Data Science Worksheet 1
+## Data Analysis
 ## Objectives
 - use csv library to read in data
-- use pure Python techniques to extract insights about the data
-- start getting acquainted with the Pandas library
+- use Python techniques to extract insights about the data
 
 ### Exercises
 
@@ -176,16 +175,16 @@ $ python
 >>> csvfile = open('rock.csv', 'rb')   # Use 'rU' for Python 3
 >>> reader = csv.DictReader(csvfile)
 >>> dir(reader)
->>> reader.filenames
+>>> reader.fieldnames
 ```
 
 2 - How many songs are from 1981?
 
 Solution:
 ```
->>> rows = [row for row in reader]
->>> len([row for row in rows if row['Release Year'] == '1981'])
-61
+print "# songs released in 1981 is: {}".format(
+    len([row for row in rows if row["Release Year"] == "1981"])
+)
 ```
 
 3 - What is the earliest release year in the data?
@@ -200,14 +199,13 @@ SONGFACTS.com is not a valid year, so we'll have to clean up Release Year by ens
 
 #### Second pass
 ```
->>> def is_valid_year(value):
-...     try:
-...         val = int(value)
-...     except ValueError:
-...         pass
-        else:
-            return val
-...
+def is_valid_year(string):
+    try:
+        year = int(string)
+    except ValueError:
+        return False
+    else:
+        return year
 
 >>> release_years = [int(row['Release Year']) for row in rows if is_valid_year(row['Release Year'])]
 >>> min(release_years)
@@ -218,57 +216,68 @@ This doesn't make any sense! Exclude that!
 
 #### Third pass
 ```
->>> def is_valid_year(value):
-...     try:
-...         val = int(value)
-...     except ValueError:
-...         pass
-        else:
-           if val > 1900:
-              return val
->>> release_years = [int(row['Release Year']) for row in rows if is_valid_year(row['Release Year'])]
->>> min(release_years)
-1955
+def is_valid_year(string):
+    try:
+        year = int(string)
+    except ValueError:
+        return False
+    else:
+        return year > 1900
+        
+
+print "Earliest release year is: {}".format(
+    min([row['Release Year'] for row in rows
+        if is_valid_year(row['Release Year'])])
+)
 ```
 
 That makes much more sense!
 
 4 - How many songs are from before 1984
 ```
->>> before_1984 = [
-    row for row in rows
-    if is_valid_year(row['Release Year']) and is_valid_year(row['Release Year']) < 1984
-]
->>> print len(before_1984)
+print "# songs released before 1984 is: {}".format(
+    len([row for row in rows
+        if is_valid_year(row["Release Year"])
+        and int(row["Release Year"]) < 1984])
+)
 ```
 
 5 - What are the top 20 songs by play count
 HINT: use builtin sorted() function
 ```
->>> top_20_rows_by_play_count = sorted(rows, key=lambda row: row['PlayCount'], reverse=True)[:20]
->>> top_20_play_count_song_names = [row['Song Clean'] for row in top_20_rows_by_play_count]
-["(Don't Fear) The Reaper", 'Layla', 'Back In Black', 'All Right Now', 'Refugee', 'Bad Company', 'Gimme Shelter', "Runnin' Down a Dream", "Jamie's Cryin'", 'Sweet Home Alabama', 'Foreplay (Long Time)', 'Over the Hills and Far Away', 'Who Are You', 'Lights', 'In the Air Tonight', 'Come Sail Away', 'Highway To Hell', 'Rock and Roll', 'Comfortably Numb', "Rock 'n' Roll Fantasy"]
+top = sorted(rows, key=lambda x: x['PlayCount'], reverse=True)
+print "Top 20 songs by play count are: "
+for data in [(row['PlayCount'], row['Song Clean']) for row in top[:20]]:
+    print data
 ```
+
 6 - Who are the top 10 most prolific artists in the data along with the number of their songs that appear in the data?
 ```
->>> artists = [row['ARTIST CLEAN'] for row in rows]
->>> from collections import Counter
->>> artists_by_play_count = Counter(artists)
->>> artists_ordered_by_play_count = sorted(artists_by_play_count.items(), key=lambda artist_and_count: artist_and_count[1], reverse=True)
->>> artists_ordered_by_play_count[:10]
-[('The Beatles', 100), ('Led Zeppelin', 69), ('Rolling Stones', 55), ('Van Halen', 44), ('Pink Floyd', 39), ('Aerosmith', 31), ('The Who', 31), ('Tom Petty & The Heartbreakers', 29), ('AC/DC', 29), ('Bob Seger', 24)]
+# ["Led Zeppelin", "Led Zeppelin", "Rolling Stones", ...]
+artist_names = [row["ARTIST CLEAN"] for row in rows]
+
+# {"Led Zeppelin": 69, "Rolling Stones": 56}
+artist_tally = tally(artist_names)
+
+# [("Led Zeppelin", 35), ...]
+pairs = sorted(artist_tally.items(), key=lambda x: x[1], reverse=True)
+
+print "Top 10 most prolific artists are: "
+for pair in pairs[:10]:
+    print pair
 ```
+
 7 - How many different artists appear in the data?
 ```
->>> artists = [row['ARTIST CLEAN'] for row in rows]
->>> len(set(artists))
-475
+print "# different artists is: {}".format(
+    len(set(artists))
+)
 ```
 NOTE: How is a Python set different from a list?
 
 8 - How many songs does 'Rock'/'rock' appear in the title of?
 ```
->>> with_rock_in_title = [row for row in rows if 'rock' in row['Song Clean'].lower()]
->>> len(with_rock_in_title)
-60
+print "# songs with word rock (case insensitive) in title is: {}".format(
+    len([row for row in rows if 'rock' in row['Song Clean'].lower()])
+)
 ```
