@@ -1,5 +1,5 @@
 # Class Info
-## https://github.com/xie1989/ga-advanced-python
+## https://github.com/xie1989/intermediate-python
 
 
 # Instructor
@@ -38,7 +38,7 @@
 
 6. Use `is_odd_or_div_by_7` and list comprehensions to write a function `get_sublist_of_numbers_odd_or_div_by_7` that takes in a list and returns a sublist of those numbers that are either odd or divisible by 7.
 
-7. Write a division function `divide(a, b)` that catch exceptions and return an error string if the arguments do not make sense. 
+7. Write a division function `divide(a, b)` that catch exceptions and return an error string if the arguments do not make sense.
 
 8. Given a list of food orders, e.g. ```["burger", "fries", "burger", "tenders", "apple pie"]```, write a function `get_aggregate_order_counts` that takes the list and returns a dictionary with the different dishes as keys and the number of times they appear in the list as the values. For example, it takes ```["burger", "fries", "burger", "tenders", "apple pie"]``` and outputs ```
 {
