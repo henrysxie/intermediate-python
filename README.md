@@ -3,14 +3,28 @@
 
 
 # Instructor
-- name: Henry Xie
-- email: henrysxie@gmail.com
-- website: [simplefractal.com](http://simplefractal.com)
+- Name: Henry Xie
+- Email: henrysxie@gmail.com
+- Website: [simplefractal.com](http://simplefractal.com)
 
 
-# Python Warm Up
+# Topics
+- `range`/`xrange`
+- List Comprehensions
+- List Slicing
+- Lambda functions
+- Sorting
+- Exception Handling
+- Debugging with `pdb` and `ipdb`
+- Reading in CSV files
+- Data Analysis Techniques
+
+
+# Python Exercises
 ## Objectives
-- review/test/warm up knowledge of lists, for loops, logical control flow, and list comprehensions
+- Practice/Review data structures, control flow and functions.
+- Learn intermediate Python techniques
+- Prepare for Data Analysis section
 
 1. Write a function that prints all the even numbers between 1 and 10,000.
 
@@ -20,19 +34,19 @@
 
 4. Write a function `get_max` that takes a list of numbers and returns the max of those numbers, don't use the builtin `max()` function. Afterward,  try using `max()`
 
-5. Write a function `is_odd_or_div_by_7` that returns True if a number is odd or divisble by 7 and False otherwise. Then write it using a `lambda` function.
+5. Write a function `is_odd_or_div_by_7` that returns True if a number is odd or divisble by 7 and False otherwise.
 
 6. Use `is_odd_or_div_by_7` and list comprehensions to write a function `get_sublist_of_numbers_odd_or_div_by_7` that takes in a list and returns a sublist of those numbers that are either odd or divisible by 7.
 
-7. Given a list of food orders, e.g. ```["burger", "fries", "burger", "tenders", "apple pie"]```, write a function `get_aggregate_order_counts` that takes the list and returns a dictionary with the different dishes as keys and the number of times they appear in the list as the values. For example, it takes ```["burger", "fries", "burger", "tenders", "apple pie"]``` and outputs ```
+7. Write a division function `divide(a, b)` that catch exceptions and return an error string if the arguments do not make sense. 
+
+8. Given a list of food orders, e.g. ```["burger", "fries", "burger", "tenders", "apple pie"]```, write a function `get_aggregate_order_counts` that takes the list and returns a dictionary with the different dishes as keys and the number of times they appear in the list as the values. For example, it takes ```["burger", "fries", "burger", "tenders", "apple pie"]``` and outputs ```
 {
    "burger": 2,
    "fries": 1,
    "tenders": 1,
    "apple pie": 1
 }```
-
-8. Use collections.Counter to achieve the same functionality.
 
 9. Write a function `get_most_popular_order_data` that takes a list of orders but instead of returning a dictionary with the counts, it just outputs a tuple: the dish that appears the most in the list and the number of times it appears in the list. So the output given the example would be ```("burger", 2)```
 
@@ -55,4 +69,4 @@
 
 7. How many different artists appear in the data?
 
-8. How songs does 'Rock' appear in the title of?
+8. How many songs does 'Rock' appear in the title of?
