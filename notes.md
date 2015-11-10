@@ -121,8 +121,8 @@ Do not catch the general `Exception` since we won't know if some other error occ
 
 
 8 - Given a list of food orders, write a function that takes the list and returns a dictionary with the different dishes as keys and the number of times they appear in the list as the values. For example,
-Takes `["burger", "fries", "burger", "tenders", "apple pie"]` and returns:
 ```python
+>>> tally(["burger", "fries", "burger", "tenders", "apple pie"])
 {
    "burger": 2,
    "fries": 1,
@@ -169,8 +169,7 @@ Note: for more on lambda functions, check this out http://www.diveintopython.net
 1 - Using csv library, read in data from https://raw.githubusercontent.com/suneel0101/data/master/classic-rock/classic-rock-song-list.csv.
 NOTE: Make sure to open the file on the browser, highlight and copy the contents into your text editor and save. Otherwise, you'll get some errors when trying to read the file through the `csv` library.
 HINT: Here's the relevant documentation on csv: https://docs.python.org/2/library/csv.html, use `DictReader`
-```
-$ python
+```python
 >>> import csv
 >>> csvfile = open('rock.csv', 'rb')   # Use 'rU' for Python 3
 >>> reader = csv.DictReader(csvfile)
@@ -181,7 +180,7 @@ $ python
 2 - How many songs are from 1981?
 
 Solution:
-```
+```python
 print "# songs released in 1981 is: {}".format(
     len([row for row in rows if row["Release Year"] == "1981"])
 )
@@ -191,14 +190,14 @@ print "# songs released in 1981 is: {}".format(
 HINT: You might have to account for/clean up dirty data
 
 #### First pass
-```
+```python
 >>> min([int(row['Release Year']) for row in rows if row['Release Year']])
 ValueError: invalid literal for int() with base 10: 'SONGFACTS.COM'
 ```
-SONGFACTS.com is not a valid year, so we'll have to clean up Release Year by ensuring we are dealing with integers.
+`SONGFACTS.com` is not a valid year, so we'll have to clean up `Release Year` by ensuring we are dealing with integers.
 
 #### Second pass
-```
+```python
 def is_valid_year(string):
     try:
         year = int(string)
@@ -215,7 +214,7 @@ def is_valid_year(string):
 This doesn't make any sense! Exclude that!
 
 #### Third pass
-```
+```python
 def is_valid_year(string):
     try:
         year = int(string)
@@ -234,7 +233,7 @@ print "Earliest release year is: {}".format(
 That makes much more sense!
 
 4 - How many songs are from before 1984
-```
+```python
 print "# songs released before 1984 is: {}".format(
     len([row for row in rows
         if is_valid_year(row["Release Year"])
@@ -244,7 +243,7 @@ print "# songs released before 1984 is: {}".format(
 
 5 - What are the top 20 songs by play count
 HINT: use builtin sorted() function
-```
+```python
 top = sorted(rows, key=lambda x: x['PlayCount'], reverse=True)
 print "Top 20 songs by play count are: "
 for data in [(row['PlayCount'], row['Song Clean']) for row in top[:20]]:
@@ -252,7 +251,7 @@ for data in [(row['PlayCount'], row['Song Clean']) for row in top[:20]]:
 ```
 
 6 - Who are the top 10 most prolific artists in the data along with the number of their songs that appear in the data?
-```
+```python
 # ["Led Zeppelin", "Led Zeppelin", "Rolling Stones", ...]
 artist_names = [row["ARTIST CLEAN"] for row in rows]
 
@@ -268,7 +267,7 @@ for pair in pairs[:10]:
 ```
 
 7 - How many different artists appear in the data?
-```
+```python
 print "# different artists is: {}".format(
     len(set(artists))
 )
@@ -276,7 +275,7 @@ print "# different artists is: {}".format(
 NOTE: How is a Python set different from a list?
 
 8 - How many songs does 'Rock'/'rock' appear in the title of?
-```
+```python
 print "# songs with word rock (case insensitive) in title is: {}".format(
     len([row for row in rows if 'rock' in row['Song Clean'].lower()])
 )
