@@ -102,7 +102,7 @@ def get_sublist_of_numbers_odd_or_div_by_7(numbers):
 ```
 Note: Here we are combining our knowledge of list comprehensions with some conditional logic inside the list comprehension.
 
-7 - Write a division function `divide(a, b)` that catch exceptions and return an error string if the arguments do not make sense. 
+7 - Write a division function `divide(a, b)` that catch exceptions and return an error string if the arguments do not make sense.
 
 Solution:
 ```python
@@ -222,7 +222,7 @@ def is_valid_year(string):
         return False
     else:
         return year > 1900
-        
+
 
 print "Earliest release year is: {}".format(
     min([row['Release Year'] for row in rows
@@ -244,10 +244,12 @@ print "# songs released before 1984 is: {}".format(
 5 - What are the top 20 songs by play count
 HINT: use builtin sorted() function
 ```python
-top = sorted(rows, key=lambda x: x['PlayCount'], reverse=True)
-print "Top 20 songs by play count are: "
-for data in [(row['PlayCount'], row['Song Clean']) for row in top[:20]]:
-    print data
+print "The top 20 songs by play count are: {}".format(
+    [(row['Song Clean'], row['PlayCount'])
+    for row in sorted(
+        rows,
+        key=lambda row: int(row['PlayCount']),
+        reverse=True)][:20])
 ```
 
 6 - Who are the top 10 most prolific artists in the data along with the number of their songs that appear in the data?
